@@ -45,33 +45,32 @@ export default function Header() {
         }}
       />
 
-  <header
-  className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
     bg-[#62d1f6]
     ${isScrolled ? "shadow-md" : ""}
   `}
->
-
+      >
         <div className="section-container">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <a href="/" className="flex items-center gap-2">
               <div className="relative">
-                
                 <div
                   className="absolute inset-0 rounded-lg animate-pulse-glow opacity-50"
                   style={{ background: "hsl(195 100% 59% / 0.3)" }}
                 />
               </div>
               <div className="flex items-center">
-                <img
-                  src="/infinity-fiber-logo.png"
-                  alt="Infinity Fiber – Precision Fiber Optics"
-                  className={`h-8 md:h-14 transition-all duration-300 ${
-                    isScrolled ? "brightness-100" : "brightness-90"
-                  }`}
-                />
-              </div>
+  <img
+    src="/infinity-fiber-logo.png"
+    alt="Infinity Fiber – Precision Fiber Optics"
+    className={`h-12 sm:h-10 md:h-14 lg:h-16 w-auto transition-all duration-300 ${
+      isScrolled ? "brightness-100" : "brightness-90"
+    }`}
+  />
+</div>
+
             </a>
 
             {/* Desktop Navigation */}

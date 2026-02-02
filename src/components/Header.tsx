@@ -65,7 +65,7 @@ export default function Header() {
   <img
     src="/infinity-fiber-logo.png"
     alt="Infinity Fiber – Precision Fiber Optics"
-    className={`h-12 sm:h-10 md:h-14 lg:h-16 w-auto transition-all duration-300 ${
+    className={`h-14 sm:h-10 md:h-14 lg:h-16 w-auto transition-all duration-300 ${
       isScrolled ? "brightness-100" : "brightness-90"
     }`}
   />

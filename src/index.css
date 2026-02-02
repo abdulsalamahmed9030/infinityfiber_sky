@@ -1,0 +1,369 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Infinity Fiber Design System
+   Aerospace/Defense Manufacturing Aesthetic
+   Colors MUST be HSL
+*/
+
+@layer base {
+  :root {
+    /* Brand Colors - Deep Navy Steel */
+    --navy: 210 55% 11%;
+    --navy-light: 210 45% 18%;
+    
+    /* Fiber Glow Cyan */
+    --cyan: 195 100% 59%;
+    --cyan-glow: 195 100% 65%;
+    
+    /* Signal Red (CTA only) */
+    --signal-red: 355 86% 41%;
+    --signal-red-hover: 355 86% 35%;
+    
+    /* Neutrals */
+    --background: 210 20% 98%;
+    --foreground: 210 55% 11%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 210 55% 11%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 55% 11%;
+    
+    --primary: 210 55% 11%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 210 55% 11%;
+    
+    --muted: 210 15% 96%;
+    --muted-foreground: 210 15% 50%;
+    
+    --accent: 195 100% 59%;
+    --accent-foreground: 210 55% 11%;
+    
+    --destructive: 355 86% 41%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 210 20% 90%;
+    --input: 210 20% 90%;
+    --ring: 195 100% 59%;
+    
+    --radius: 0.375rem;
+    
+    /* Custom tokens */
+    --glass-bg: 210 55% 11% / 0.85;
+    --glass-border: 0 0% 100% / 0.1;
+    --text-muted: 210 15% 55%;
+    
+    /* Sidebar tokens */
+    --sidebar-background: 210 55% 11%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 195 100% 59%;
+    --sidebar-primary-foreground: 210 55% 11%;
+    --sidebar-accent: 210 45% 18%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 210 45% 18%;
+    --sidebar-ring: 195 100% 59%;
+  }
+
+  .dark {
+    --background: 210 55% 7%;
+    --foreground: 210 20% 95%;
+    
+    --card: 210 55% 11%;
+    --card-foreground: 210 20% 95%;
+    
+    --popover: 210 55% 11%;
+    --popover-foreground: 210 20% 95%;
+    
+    --primary: 0 0% 100%;
+    --primary-foreground: 210 55% 11%;
+    
+    --secondary: 210 45% 18%;
+    --secondary-foreground: 210 20% 95%;
+    
+    --muted: 210 45% 18%;
+    --muted-foreground: 210 15% 60%;
+    
+    --accent: 195 100% 59%;
+    --accent-foreground: 210 55% 11%;
+    
+    --border: 210 45% 18%;
+    --input: 210 45% 18%;
+    --ring: 195 100% 59%;
+    
+    --glass-bg: 210 55% 5% / 0.9;
+    --glass-border: 0 0% 100% / 0.08;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight text-navy dark:text-white;
+  }
+}
+
+@layer components {
+  /* Glass morphism header */
+  .glass-header {
+    @apply backdrop-blur-xl border-b;
+    background: hsl(var(--glass-bg));
+    border-color: hsl(var(--glass-border));
+  }
+
+  /* Navigation link with animated underline */
+  .nav-link {
+    @apply relative text-sm font-medium transition-colors duration-200;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 h-0.5 w-0 transition-all duration-300;
+    background: hsl(var(--cyan));
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  /* Primary CTA - Signal Red */
+  .btn-primary-cta {
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white rounded-md transition-all duration-200;
+    background: hsl(var(--signal-red));
+  }
+
+  .btn-primary-cta:hover {
+    background: hsl(var(--signal-red-hover));
+    @apply shadow-lg;
+    box-shadow: 0 10px 30px -10px hsl(var(--signal-red) / 0.4);
+  }
+
+  /* Secondary Button - Navy outline */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold rounded-md border-2 transition-all duration-200;
+    color: hsl(var(--navy));
+    border-color: hsl(var(--navy));
+    background: transparent;
+  }
+
+  .btn-secondary:hover {
+    background: hsl(var(--navy));
+    @apply text-white;
+  }
+
+  .dark .btn-secondary {
+    @apply text-white border-white;
+  }
+
+  .dark .btn-secondary:hover {
+    @apply bg-white text-navy;
+  }
+
+  /* Section container */
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Trust badge */
+  .trust-badge {
+    @apply inline-flex items-center gap-2 text-sm font-medium;
+    color: hsl(var(--text-muted));
+  }
+
+  .trust-badge svg {
+    color: hsl(var(--cyan));
+  }
+
+  /* Card with hover lift */
+  .card-hover {
+    @apply transition-all duration-300;
+  }
+
+  .card-hover:hover {
+    @apply -translate-y-1;
+    box-shadow: 0 20px 40px -20px hsl(var(--navy) / 0.15);
+  }
+
+  /* Certification badge */
+  .cert-badge {
+    @apply relative overflow-hidden rounded-lg p-6 text-center;
+    background: linear-gradient(135deg, hsl(210 45% 18%), hsl(210 55% 11%));
+  }
+
+  .cert-badge::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-1000;
+    background: linear-gradient(90deg, transparent, hsl(var(--cyan) / 0.2), transparent);
+    animation: lightSweep 8s ease-in-out infinite;
+  }
+
+  /* Industry card overlay */
+  .industry-card {
+    @apply relative overflow-hidden rounded-lg aspect-[4/3];
+  }
+
+  .industry-card::after {
+    content: '';
+    @apply absolute inset-0 transition-opacity duration-300;
+    background: linear-gradient(to top, hsl(var(--navy) / 0.9), hsl(var(--navy) / 0.4));
+  }
+
+  .industry-card:hover::after {
+    background: linear-gradient(to top, hsl(var(--navy) / 0.8), hsl(var(--navy) / 0.2));
+  }
+
+  /* Scroll progress bar */
+  .scroll-progress {
+    @apply fixed top-0 left-0 h-0.5 z-[100];
+    background: hsl(var(--cyan));
+  }
+
+  /* Animated underline on hover */
+  .underline-animate {
+    @apply relative;
+  }
+
+  .underline-animate::after {
+    content: '';
+    @apply absolute bottom-0 left-0 h-0.5 w-0 transition-all duration-300;
+    background: hsl(var(--cyan));
+  }
+
+  .underline-animate:hover::after {
+    @apply w-full;
+  }
+
+  /* Tech grid pattern for footer */
+  .tech-grid-bg {
+    background-image: 
+      linear-gradient(hsl(var(--cyan) / 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--cyan) / 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Fiber glow effect */
+  .fiber-glow {
+    box-shadow: 0 0 20px hsl(var(--cyan) / 0.3), 0 0 40px hsl(var(--cyan) / 0.1);
+  }
+}
+
+@layer utilities {
+  /* Text colors */
+  .text-navy {
+    color: hsl(var(--navy));
+  }
+
+  .text-cyan {
+    color: hsl(var(--cyan));
+  }
+
+  .text-muted-custom {
+    color: hsl(var(--text-muted));
+  }
+
+  /* Background colors */
+  .bg-navy {
+    background-color: hsl(var(--navy));
+  }
+
+  .bg-navy-light {
+    background-color: hsl(var(--navy-light));
+  }
+
+  .bg-light-gray {
+    background-color: hsl(210 20% 97%);
+  }
+
+  /* Border colors */
+  .border-cyan {
+    border-color: hsl(var(--cyan));
+  }
+
+  /* Gradients */
+  .gradient-navy {
+    background: linear-gradient(135deg, hsl(var(--navy-light)), hsl(var(--navy)));
+  }
+
+  .gradient-cyan-subtle {
+    background: linear-gradient(135deg, hsl(var(--cyan) / 0.1), transparent);
+  }
+}
+
+/* Animations */
+@keyframes lightSweep {
+  0%, 100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(100%);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-light-sweep {
+  animation: lightSweep 8s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

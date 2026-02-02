@@ -35,128 +35,118 @@ export default function Header() {
       />
 
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
-        bg-[#62d1f6] overflow-x-hidden
-        ${isScrolled ? "shadow-md" : ""}
-      `}
+  className={`fixed top-0 inset-x-0 z-50 bg-[#62d1f6] transition-all duration-300
+  ${isScrolled ? "shadow-md" : ""}`}
+>
+  <div className="w-full max-w-full px-3 sm:px-4 lg:max-w-7xl lg:mx-auto lg:px-8">
+    <div className="flex items-center justify-between h-16 md:h-20 min-w-0">
+      
+      {/* LOGO */}
+      <a
+        href="/"
+        className="flex items-center min-w-0"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex  justify-between h-16 md:h-20">
-            {/* Logo */}
-            <a href="/" className="flex items-center gap-2 overflow-hidden">
-              <div className="relative overflow-hidden">
-                <div
-                  className="absolute inset-0 rounded-lg animate-pulse-glow opacity-40"
-                  style={{ maxWidth: "100%" }}
-                />
-              </div>
+        <img
+          src="/infinity-fiber-logo.png"
+          alt="Infinity Fiber – Precision Fiber Optics"
+          className={`
+            h-12 md:h-14 lg:h-16
+            max-w-[180px] sm:max-w-[220px] lg:max-w-none
+            w-auto object-contain
+            transition-all duration-300
+            ${isScrolled ? "brightness-100" : "brightness-90"}
+          `}
+        />
+      </a>
 
-              <img
-                src="/infinity-fiber-logo.png"
-                alt="Infinity Fiber – Precision Fiber Optics"
-                className={`h-14 sm:h-10 md:h-14 lg:h-16 
-                max-w-[70vw] sm:max-w-none
-                w-auto object-contain transition-all duration-300 ${
-                  isScrolled ? "brightness-100" : "brightness-90"
-                }`}
-              />
-            </a>
+      {/* DESKTOP NAV */}
+      <nav className="hidden lg:flex items-center gap-8">
+        {navLinks.map((link) => (
+          <a
+            key={link.name}
+            href={link.href}
+            className={`text-sm font-medium transition-colors ${
+              isScrolled
+                ? "text-black hover:text-white"
+                : "text-navy/80 hover:text-navy"
+            }`}
+          >
+            {link.name}
+          </a>
+        ))}
+      </nav>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className={`relative text-sm font-medium transition-colors
-                  ${
-                    isScrolled
-                      ? "text-black hover:text-white"
-                      : "text-navy/80 hover:text-navy dark:text-black dark:hover:text-white"
-                  }`}
-                >
-                  {link.name}
-                </a>
-              ))}
-            </nav>
+      {/* DESKTOP ACTIONS */}
+      <div className="hidden lg:flex items-center gap-4">
+        <button
+          onClick={() => setIsDark(!isDark)}
+          className="p-2 rounded-lg text-navy/60 hover:bg-navy/10"
+        >
+          {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+        </button>
 
-            {/* Desktop Actions */}
-            <div className="hidden lg:flex items-center gap-4">
+        <a href="#contact" className="btn-primary-cta">
+          Request a Quote
+        </a>
+      </div>
+
+      {/* MOBILE MENU BUTTON */}
+      <button
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        className="lg:hidden p-2 text-navy flex-shrink-0"
+        aria-label="Toggle menu"
+      >
+        {isMobileMenuOpen ? (
+          <X className="w-6 h-6" />
+        ) : (
+          <Menu className="w-6 h-6" />
+        )}
+      </button>
+    </div>
+  </div>
+
+  {/* MOBILE MENU */}
+  <AnimatePresence>
+    {isMobileMenuOpen && (
+      <motion.div
+        initial={{ height: 0, opacity: 0 }}
+        animate={{ height: "auto", opacity: 1 }}
+        exit={{ height: 0, opacity: 0 }}
+        className="lg:hidden w-full"
+      >
+        <div className="px-4 py-4">
+          <nav className="flex flex-col gap-2">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="px-3 py-2 rounded-md text-gray-700 hover:bg-black/5"
+              >
+                {link.name}
+              </a>
+            ))}
+
+            <div className="mt-3 flex items-center justify-between border-t pt-3">
               <button
                 onClick={() => setIsDark(!isDark)}
-                className={`p-2 rounded-lg transition-colors ${
-                  isScrolled
-                    ? "text-gray-400 hover:text-white hover:bg-white/10"
-                    : "text-navy/60 hover:text-navy hover:bg-navy/10 dark:text-gray-400 dark:hover:text-white dark:hover:bg-white/10"
-                }`}
-                aria-label="Toggle dark mode"
+                className="flex items-center gap-2 text-sm text-gray-600"
               >
-                {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                {isDark ? <Sun size={16} /> : <Moon size={16} />}
+                {isDark ? "Light Mode" : "Dark Mode"}
               </button>
-
-              <a href="#contact" className="btn-primary-cta">
-                Request a Quote
-              </a>
             </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`lg:hidden p-2 rounded-lg transition-colors ${
-                isScrolled
-                  ? "text-white hover:bg-white/10"
-                  : "text-navy hover:bg-navy/10 dark:text-white dark:hover:bg-white/10"
-              }`}
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
+            <a href="#contact" className="btn-primary-cta text-center mt-3">
+              Request a Quote
+            </a>
+          </nav>
         </div>
+      </motion.div>
+    )}
+  </AnimatePresence>
+</header>
 
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden overflow-x-hidden border-t border-white/10"
-            >
-              <div className="max-w-7xl mx-auto px-4 py-4">
-                <nav className="flex flex-col gap-2">
-                  {navLinks.map((link) => (
-                    <a
-                      key={link.name}
-                      href={link.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
-                    >
-                      {link.name}
-                    </a>
-                  ))}
-
-                  <div className="flex items-center justify-between px-4 py-3 mt-2 border-t border-white/10">
-                    <button
-                      onClick={() => setIsDark(!isDark)}
-                      className="flex items-center gap-2 text-gray-400 hover:text-white"
-                    >
-                      {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-                      <span className="text-sm">
-                        {isDark ? "Light Mode" : "Dark Mode"}
-                      </span>
-                    </button>
-                  </div>
-
-                  <a href="#contact" className="btn-primary-cta text-center mt-2">
-                    Request a Quote
-                  </a>
-                </nav>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </header>
     </>
   );
 }
